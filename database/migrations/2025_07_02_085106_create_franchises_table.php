@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-
-            $table->enum('status',['progress','pending','completed','Cancelled','assigned'])->default('pending');
-            $table->integer('cost')->nullable();
-
+        Schema::create('franchises', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('lacation');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('franchises');
     }
 };

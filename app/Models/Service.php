@@ -25,4 +25,9 @@ class Service extends Model
         'service',
 
     ];
+ public function user()
+{
+    return $this->belongsTo(User::class,'assigned_manager_id');
+}
+
 }

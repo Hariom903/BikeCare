@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'franchises_id'
     ];
 
     /**
@@ -46,4 +47,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public static function getRoleOptions()
+{
+    return ['serviceManager','technician','receptionist','inventoryManager','picupAgent','accountant'];
+}
+
+
+ public function bookings()
+{
+    return $this->hasMany(Service::class);
+}
 }

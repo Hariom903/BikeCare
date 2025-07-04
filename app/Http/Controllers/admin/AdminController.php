@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
   public function index(){
     $users = User::count();
-    $bookings =Service::limit(5)->get();
+    $bookings =Service::limit(4)->get();
     return view("admin.index",compact('users','bookings'));
   }
 }

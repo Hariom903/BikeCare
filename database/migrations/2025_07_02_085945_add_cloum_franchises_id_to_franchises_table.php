@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('services', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
+     $table->unsignedBigInteger('franchises_id')->nullable(); // Add column if not exists
 
-            $table->enum('status',['progress','pending','completed','Cancelled','assigned'])->default('pending');
-            $table->integer('cost')->nullable();
-
-        });
+    $table->foreign('franchises_id')
+          ->references('id')
+          ->on('franchises')
+          ->onDelete('cascade');
+    });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('services', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

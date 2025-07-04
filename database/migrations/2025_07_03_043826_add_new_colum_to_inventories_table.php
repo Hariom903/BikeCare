@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-
-            $table->enum('status',['progress','pending','completed','Cancelled','assigned'])->default('pending');
-            $table->integer('cost')->nullable();
-
+        Schema::table('inventories', function (Blueprint $table) {
+            $table->string('category');
+        
         });
     }
 
@@ -24,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function (Blueprint $table) {
+        Schema::table('inventories', function (Blueprint $table) {
             //
         });
     }

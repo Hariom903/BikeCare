@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
 
-            $table->enum('status',['progress','pending','completed','Cancelled','assigned'])->default('pending');
-            $table->integer('cost')->nullable();
+            $table->foreignId('assigned_manager_id')->constrained('users','id');
+
+
 
         });
     }
