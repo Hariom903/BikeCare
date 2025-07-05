@@ -112,7 +112,7 @@
                     <div class="container bg-body p-4  mb-4 shadow ">
                         <h3> Inventory item list </h3>
                         <table id="inventoryTable" class="table display ">
-                            <thead>
+                            <thead style=" background-color: rgb(69, 3, 75);">
                                 <tr>
                                     <th> Id
                                     </th>
@@ -267,7 +267,7 @@ function update(){
       console.log(res);
                if (res['success']) {
 
-                  
+
                         editModal.hide();
                         window.location.reload();
 

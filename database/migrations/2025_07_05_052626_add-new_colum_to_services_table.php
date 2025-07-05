@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
 
-            $table->enum('status',['assigned_to_pickup','pending','completed','picked_up','assigned_to_technician','in_progress'])->default('pending');
-            $table->integer('cost')->nullable();
+            $table->unsignedBigInteger('assigned_pickup_id')->nullable();
+            $table->unsignedBigInteger('assigned_technician_id')->nullable();
 
         });
     }

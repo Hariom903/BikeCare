@@ -13,7 +13,7 @@ body {
 
 :root {
   --bs-body-bg: #f4f7fa;
-  --bs-body-bg-rgb: 244, 247, 250;
+  --bs-body-bg-rgb: red;
   --pc-heading-color: #1d2630;
   --pc-active-background: #f3f5f7;
   --pc-sidebar-background: #3f4d67;

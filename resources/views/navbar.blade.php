@@ -1,4 +1,4 @@
- <nav class="pc-sidebar">
+ <nav class="pc-sidebar" style=" background-color:purple">
      <div class="navbar-wrapper">
 
          <div class="m-header">
@@ -19,22 +19,25 @@
                  <li class="pc-item pc-caption">
                      <label>Navigation</label>
                  </li>
+               @if(auth()->user()->role === 'admin')
                  <li class="pc-item">
-                     <a href="{{ route('dashbord') }}" class="pc-link">
+                     <a href="{{ route('dashboard') }}" class="pc-link">
                          <span class="pc-micon">
                              <i data-feather="home"></i>
                          </span>
                          <span class="pc-mtext">Dashboard</span>
                      </a>
                  </li>
+
                  <li class="pc-item">
-                     <a href="{{ route('booking') }}" class="pc-link">
+                     <a href="{{ route('booking') }}" class=" pc-link">
                          <span class="pc-micon">
                              <i data-feather="calendar"></i>
                          </span>
                          <span class="pc-mtext">Bookings</span>
                      </a>
                  </li>
+
                  <li class="pc-item">
                      <a href="{{ route('manageuser') }}" class="pc-link">
                          <span class="pc-micon">
@@ -43,14 +46,16 @@
                          <span class="pc-mtext">Manage User</span>
                      </a>
                  </li>
+                 @elseif(auth()->user()->role ==='inventoryManager')
                  <li class="pc-item">
-                             <a href="{{ route('inventory') }}" class="pc-link">
-                                 <span class="pc-micon">
-                                     <i class="fa-solid fa-truck-moving"></i>
-                                 </span>
-                                 <span class="pc-mtext">Add Inventory</span>
-                             </a>
+                     <a href="{{ route('inventory') }}" class="pc-link">
+                         <span class="pc-micon">
+                             <i class="fa-solid fa-truck-moving"></i>
+                         </span>
+                         <span class="pc-mtext">Add Inventory</span>
+                     </a>
                  </li>
+                 @elseif(auth()->user()->role === 'accountant')
                  <li class="pc-item">
                      <a href="#" class="pc-link">
                          <span class="pc-micon">
@@ -62,27 +67,47 @@
 
 
 
-                     
-                 </li>
-                 <li class="pc-item">
-                     <a href="#" class="pc-link">
-                         <span class="pc-micon">
-                             <i class="fa-solid fa-money-bills"></i>
-                         </span>
-                         <span class="pc-mtext"> Service</span>
-                     </a>
-                 </li>
-                 <li class="pc-item">
-                     <a href="#" class="pc-link">
-                         <span class="pc-micon">
-                             <i class="fa-solid fa-money-bills"></i>
-                         </span>
-                         <span class="pc-mtext">  Pickup & Delivery</span>
-                     </a>
-                 </li>
 
+                 </li>
+                 @elseif(auth()->user()->role ==='receptionist')
+                 <li class="pc-item">
+                     <a href="{{ route('receptionist') }}" class="pc-link">
+                         <span class="pc-micon">
+                             <i class="fa-solid fa-money-bills"></i>
+                         </span>
+                         <span class="pc-mtext">Receptionist</span>
+                     </a>
+                 </li>
+                 @elseif (auth()->user()->role === 'technician')
+                     <li class="pc-item">
+                         <a href="{{ route('technician') }}" class="pc-link">
+                             <span class="pc-micon">
+                                 <i class="fa-solid fa-tools"></i>
+                             </span>
+                             <span class="pc-mtext">Technician</span>
+                         </a>
+                     </li>
+
+                    @elseif (auth()->user()->role === 'serviceManager')
+                 <li class="pc-item">
+                     <a href="{{ route('servicemanager') }}" class="pc-link">
+                         <span class="pc-micon">
+                             <i class="fa-solid fa-user"></i>
+                         </span>
+                         <span class="pc-mtext"> Service Maneger </span>
+                     </a>
+                 </li>
+                 @elseif(auth()->user()->role === 'picupAgent')
+                 <li class="pc-item">
+                     <a href="{{ route('pickupagent') }}" class="pc-link">
+                         <span class="pc-micon">
+                             <i class="fa-solid fa-money-bills"></i>
+                         </span>
+                         <span class="pc-mtext"> Pickup & Delivery</span>
+                     </a>
+                 </li>
+                @endif
              </ul>
          </div>
      </div>
  </nav>
-

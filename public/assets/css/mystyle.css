@@ -1,3 +1,112 @@
 .error{
     color: red;
 }
+
+  .nav-tabs .nav-link {
+    color: gray; /* Default inactive color */
+  }
+
+  .nav-tabs .nav-link.active {
+    color: rgb(100, 9, 100); /* Active tab color */
+    font-weight: bold;
+  }
+
+h3{
+    color: rgb(100, 9, 100);
+    font-weight: 600;
+}
+ th {
+
+  color: #fff;
+  text-align: center;
+}
+tr:nth-child(odd) {
+
+  color: #fff !important;
+  text-align: center !important;
+
+}
+th, td {
+      color: white;
+  padding: 0.5rem;
+  text-align: center;
+}
+/* td:hover {
+  background-color: rgb(126, 42, 9);
+}
+   */
+ .dt-length label{
+     color: purple;
+    padding: 10PX !important;
+
+   }
+.paginate_button {
+  border-radius: 0 !important;
+}
+.pc-header {
+    background: linear-gradient(135deg, rgba(251, 194, 235, 0.8), rgba(166, 193, 238, 0.8));
+    backdrop-filter: blur(8px);
+
+}
+.pc-head-link:hover {
+    color: #6f42c1;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.dropdown-user-profile {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-radius: 12px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #6f42c1;
+}
+
+.user-avtar {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Feather icons consistent size */
+.pc-head-link svg,
+.dropdown-item svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+}
+
+/* Buttons */
+.btn-primary {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+    background-color: #5a2c91;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dropdown-user-profile {
+        width: 90%;
+        left: 5% !important;
+        right: 5% !important;
+    }
+}
+.pc-link{
+    text-decoration: none;
+}
+.btn-p{
+    background-color: #720772 !important;
+    color: #ffff !important;
+}
+.bg-p{
+   background-color: #720772 !important;
+    color: #ffff !important;
+
+}

@@ -3,13 +3,13 @@
 @section('main')
     <div class="container pt-4">
         <div class="ps-3">
-            <h3 style="color:rgb(100, 9, 100); font-weight:bold"> Booking Management </h3>
+            <h3 style="color:rgb(100, 9, 100); font-weight:bold">  Service Management </h3>
             <p>Manage and track all service bookings</p>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                    role="tab" aria-controls="home" aria-selected="true"> Pending for Assigning </button>
+                    role="tab" aria-controls="home" aria-selected="true">  Assigning </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab"  data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Assigned Booking </button>
@@ -31,14 +31,12 @@
                           <th>Status</th>
                           <th>Service Type</th>
                           <th>Cost</th>
-                          <th>Assign Manager</th>
+                          <th>Assign picup Agent </th>
                       </tr>
                   </thead>
                   <tbody>
                        @foreach ($bookings as $booking)
-                    @if ($booking->status !== 'pending')
-                        @continue
-                    @endif
+
                     <tr class="text-center">
                         <td><input type="checkbox" class="booking_checkbox" value="{{ $booking->booking_id }}"></td>
                         <td>{{ $booking->booking_id }}</td>
@@ -49,11 +47,17 @@
                         <td>{{ $booking->service_type }}</td>
                         <td>{{ $booking->cost ?? 'N/A' }}</td>
                         <td>
-                            <select class="manager_dropdown form-select form-select-sm"
+                             <select class="picupAgents_dropdown form-select form-select-sm"
                                 data-booking-id="{{ $booking->booking_id }}">
-                                <option value="">Select Manager</option>
-                                @foreach ($managers as $manager)
-                                    <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                                <option value="">Select
+                                  @if($booking->service_type=='drop')
+                                 Technician
+                                 @else
+                                 Picup Agent
+                                  @endif
+                                </option>
+                                @foreach ($picupAgents as $picupAgent)
+                                    <option value="{{ $picupAgent->id }}">{{ $picupAgent->name }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -63,46 +67,6 @@
                     </table>
 
                     <button id="assignBtn" class="btn btn-primary mt-3">Assign Selected</button>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-        <table class="table display myTable" id="myTableAssigned">
-            <thead style=" background-color: rgb(69, 3, 75);">
-                <tr class="text-center">
-
-                    <th>Booking ID</th>
-                    <th>Customer</th>
-                    <th>Bike & Service</th>
-                    <th>Date & Time</th>
-                    <th>Status</th>
-                    <th>Cost</th>
-                    <th>Assign Manager Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($bookings as $booking)
-                    @if ($booking->status !== 'assigned')
-                        @continue
-                    @endif
-
-                    <tr class="text-center">
-
-                        <td>{{ $booking->booking_id }}</td>
-                        <td>{{ $booking->customerName }} <br> {{ $booking->email }} ({{ $booking->phone }})</td>
-                        <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
-                        <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
-                        <td>{{ $booking->status }}</td>
-                        <td>{{ $booking->cost ?? 'N/A' }}</td>
-                        <td>
-                            {{ $booking->user->name }}
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-
-
     </div>
 
     </div>

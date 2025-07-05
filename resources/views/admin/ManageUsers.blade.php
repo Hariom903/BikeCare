@@ -1,7 +1,10 @@
 @extends('layout.app')
 @section('main')
     <div class="container pt-4">
-
+        <div class="ps-3">
+<h3 style="color:rgb(100, 9, 100); font-weight:bold"> Manage User  </h3>
+                <p>Welcome back! Here's what's happening at your bike service center.</p>
+        </div>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
 
@@ -81,7 +84,7 @@
 
         <table class="table display" id="UserTable">
 
-            <thead>
+            <thead style=" background-color: rgb(69, 3, 75);">
                 <tr>
                     <th> Name </th>
                     <th> Email </th>

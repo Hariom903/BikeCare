@@ -40,25 +40,22 @@
                         <a class="nav-link " aria-current="page" href="#">Book Service</a>
                     </li>
                     <li class="nav-item ms-2">
-                        <a class="nav-link btn btn-primary text-white " href="{{ route('dashbord') }}">Admin Panel</a>
+                        <a class="nav-link btn btn-primary text-white " href="{{ route('dashboard') }}">Admin Panel</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-  @if(session('success'))
-<div class="toast show position-fixed bg-info bottom-0 end-0 m-3" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <strong class="me-auto">Success</strong>
-    <small>Just now</small>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-    {{ session('success') }}
-  </div>
-</div>
-@endif
+    @if (session('success'))
+        <div class="toast show position-fixed bg-info bottom-0 end-0 m-3" id="toast" role="alert"
+            aria-live="assertive" aria-atomic="true">
+
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
 
 
 
@@ -75,7 +72,7 @@
             <div class=" row  mb-8">
                 <div class="p-4 rounded border-2 shadow  col-12 col-sm-3">
                     <h3 class="font-semibold text-gray-900 mb-1">Basic Service</h3>
-                    <p class="text-primary font-medium mb-2">From $50</p>
+                    <p class="text-primary font-medium mb-2">From 150</p>
                     <p class="text-sm text-gray-600">Chain cleaning, basic adjustment</p>
                 </div>
                 <div class="p-4 rounded border-2 shadow  col-12 col-sm-3">
@@ -111,42 +108,43 @@
                             <div class ="col-6">
                                 <label class="form-label">Full
                                     Name</label>
-                                    <input type="text" name="customerName" class="form-control rounded"
+                                <input type="text" name="customerName" class="form-control rounded"
                                     placeholder="Enter your full name" value="{{ old('customerName') }}">
-                                    @error('customerName')
-                                     <div class="error">
+                                @error('customerName')
+                                    <div class="error">
                                         {{ $message }}
-                                     </div>
-                                    @enderror
+                                    </div>
+                                @enderror
                             </div>
                             <div class ="col-6">
                                 <label class="form-label">Phone Number</label>
-                                <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="(555) 123-4567"
-                                    value="">
-                                     @error('phone')
-                                     <div class="error">
+                                <input type="text" name="phone" class="form-control"
+                                    value="{{ old('phone') }}" placeholder="(555) 123-4567" value="">
+                                @error('phone')
+                                    <div class="error">
                                         {{ $message }}
-                                     </div>
-                                    @enderror
+                                    </div>
+                                @enderror
                             </div>
 
 
                             <div class="col-6"><label class="form-label">Email Address</label>
-                                <input type="email" name="email" value="{{ old('email') }}" class="form-control"
-                                    placeholder="your@email.com">
-                                      @error('email')
-                                     <div class="error">
+                                <input type="email" name="email" value="{{ old('email') }}"
+                                    class="form-control" placeholder="your@email.com">
+                                @error('email')
+                                    <div class="error">
                                         {{ $message }}
-                                     </div>
-                                    @enderror
+                                    </div>
+                                @enderror
                             </div>
                             <div class="col-6"><label class="form-label">Address</label><input type="text"
-                                    name="address" class="form-control" placeholder="Your address" value="{{ old('address') }}">
-                                      @error('address')
-                                     <div class="error">
+                                    name="address" class="form-control" placeholder="Your address"
+                                    value="{{ old('address') }}">
+                                @error('address')
+                                    <div class="error">
                                         {{ $message }}
-                                     </div>
-                                    @enderror
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -165,7 +163,7 @@
                                 <div class="col-12 col-sm-6">
                                     <label class=" form-label mb-2">Bike Type</label>
                                     <select name="bikeType" class=" form-control ">
-                                        <option disabled  selected>Select bike type</option>
+                                        <option disabled selected>Select bike type</option>
                                         <option value="Road Bike">Road Bike</option>
                                         <option value="Mountain Bike">Mountain Bike</option>
                                         <option value="Hybrid">Hybrid</option>
@@ -174,42 +172,51 @@
                                         <option value="Cruiser">Cruiser</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                      @error('bikeType')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                    @error('bikeType')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <label class="form-label mb-2">Brand</label><input type="text"
-                                        name="bikeBrand" value="{{ old('bikeBrand') }}" class="  border form-control "
-                                        placeholder="e.g., Trek, Giant, Specialized">
-                                        @error('bikeBrand')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                        name="bikeBrand" value="{{ old('bikeBrand') }}"
+                                        class="  border form-control " placeholder="e.g., Trek, Giant, Specialized">
+                                    @error('bikeBrand')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
 
 
-                                <div class="col-12 col-sm-6"><label class="form-label mb-2">Model</label><input type="text"
-                                        name="bikeModel" class="form-control" placeholder="Bike model"
-                                       value="{{ old('bikeModel') }}">
-                                          @error('bikeModel')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                <div class="col-12 col-sm-4"><label class="form-label mb-2">Model</label><input
+                                        type="text" name="bikeModel" class="form-control"
+                                        placeholder="Bike model" value="{{ old('bikeModel') }}">
+                                    @error('bikeModel')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
-                                    </div>
-                                <div class="col-12 col-sm-6"><label class="form-label mb-2">Year</label><input type="number"
-                                        name="year" min="1980" max="2025" class="form-control"
-                                        placeholder="2023"value="{{ old('year') }}">
-                                         @error('year')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                </div>
+                                <div class="col-12 col-sm-2"><label class="form-label mb-2"> Bike Number  </label><input
+                                        type="text" name="bikenumber" class="form-control"
+                                        placeholder="Bike number" value="{{ old('bikenumber') }}">
+                                    @error('bikenumber')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
-                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6"><label class="form-label mb-2">Year</label><input
+                                        type="number" name="year" min="1980" max="2025"
+                                        class="form-control" placeholder="2023"value="{{ old('year') }}">
+                                    @error('year')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
 
                             </div>
 
@@ -227,60 +234,88 @@
                                 <div class="col-12 col-sm-6"><label class=" form-lable mb-2">Preferred
                                         Date</label><input type="date" name="preferredDate" min="2025-06-30"
                                         class="form-control" value="{{ old('preferredDate') }}">
-                                            @error('preferredDate')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
-                                    @enderror
-                                    </div>
-                                <div class="col-12 col-sm-6"><label class=" form-lable mb-2">Preferred
-                                        Time</label>
-                                    <input type="time" value="{{ old('preferredTime') }}"  name="preferredTime" class="form-control">
-                                      @error('preferredTime')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                    @error('preferredDate')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="row gp-3">
+
+                                        <div class="col-4 ">
+                                            <label class=" form-lable mb-2"> Service Type </label>
+                                            <div class="d-flex gap-2">
+                                        <div class="form-check">
+                                                <input type="radio" class="form-check-input" id="pickup"
+                                                    name="service_type" value="pickup">
+                                                <label class="form-check-label" for="pickup">Pickup</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" id="drop" value="drop"
+                                                    name="service_type">
+                                                <label class="form-check-label" for="drop">Drop</label>
+                                            </div>
+                                            </div>
+                                            @error('service_type')
+                                            <div class="error"> {{ $message }} </div>
+
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-4">
+                                            <label for="preferredTime" class="form-label mb-2">Preferred Time</label>
+                                            <input type="time" value="{{ old('preferredTime') }}"
+                                                name="preferredTime" id="preferredTime" class="form-control">
+                                            @error('preferredTime')
+                                                <div class="text-danger small mt-1">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class=" col-12 col-sm-6 mt-4"><label class=" form-lable mb-2">Urgency
                                         Level</label><select name="urgency" class="form-control">
-                                      <option selected disabled > - Select Urgency  -  </option>
+                                        <option selected disabled> - Select Urgency - </option>
                                         <option value="normal">Normal (3-5 days)</option>
                                         <option value="urgent">Urgent (1-2 days)</option>
                                         <option value="emergency">Emergency (Same day)</option>
                                     </select>
-                                     @error('urgency')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                    @error('urgency')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
                                 <div class="col-12 col-sm-6 mt-4">
                                     <label class="form-lable mb-2">
                                         Service </label>
-                                        <select class="form-control" name="service" >
-                                            <option disabled selected>-Select Service-</option>
-                                           <option value="Basic Service">Basic Service</option>
-                                           <option value="Standard Service">Standard Service</option>
-                                           <option value="Premium Service">Premium Service</option>
-                                           <option value="Repair Service">Repair Service</option>
-                                        </select>
-                                         @error('issues')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                    <select class="form-control" name="service">
+                                        <option disabled selected>-Select Service-</option>
+                                        <option value="Basic Service">Basic Service</option>
+                                        <option value="Standard Service">Standard Service</option>
+                                        <option value="Premium Service">Premium Service</option>
+                                        <option value="Repair Service">Repair Service</option>
+                                    </select>
+                                    @error('issues')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="col-12 mt-4"><label class=" form-lable mb-2">Describe
                                         Issues or Special Requests</label>
                                     <textarea name="issues" value="{{ old('issues') }}" class="form-control"
                                         placeholder="Describe any specific issues with your bike or special requests..."></textarea>
-                                         @error('issues')
-                                     <div class="error">
-                                        {{ $message }}
-                                     </div>
+                                    @error('issues')
+                                        <div class="error">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                             </div>

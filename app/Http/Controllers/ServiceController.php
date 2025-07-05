@@ -13,7 +13,8 @@ class ServiceController extends Controller
 {
     public function store(Request $request)
     {
-
+        // echo "<pre>";
+        // print_r($request->all()); die();
        $validate = $request->validate([
             'customerName'=>"required ",
             'phone'=>"required ||numeric",
@@ -21,13 +22,15 @@ class ServiceController extends Controller
             'address'=>"required ",
             'bikeType'=>"required ",
             'bikeBrand'=>"required ",
-            'bikeModel'=>"required ",
+            'bikeModel'=>"nullable ",
             'year'=>"required ",
             'preferredDate'=>"required ",
             'preferredTime'=>"required ",
             'urgency'=>"required ",
             'issues'=>"required ",
             'service'=>'required',
+            'service_type' => 'required|in:pickup,drop',
+            'bikenumber'=>"required",
 
         ]);
 
@@ -37,7 +40,7 @@ class ServiceController extends Controller
              $data = Service::create($validate);
              if($data){
                 Mail::to($request->email)->send( new wellComeMail() );
-                return back()->with("success","you booking is submit ");
+                return back()->with("success","Your booking is submit ");
              }
         }catch(Exception $e){
               dd($e);

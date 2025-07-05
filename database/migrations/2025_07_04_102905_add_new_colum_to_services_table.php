@@ -12,10 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('services', function (Blueprint $table) {
-
-            $table->enum('status',['assigned_to_pickup','pending','completed','picked_up','assigned_to_technician','in_progress'])->default('pending');
-            $table->integer('cost')->nullable();
-
+            $table->enum('service_type',['drop','pickup'])->default('drop');
         });
     }
 

@@ -13,7 +13,8 @@ class BookingController extends Controller
     $bookings = Service::with('user')->get();
     // echo "<pre>";
     // print_r($bookings); die();
-    $managers = User::where('role','serviceManager')->get();
+    $managers = User::where('role','serviceManager')
+    ->get();
     return view('admin.booking',compact('bookings','managers'));
  }
 
@@ -33,6 +34,62 @@ class BookingController extends Controller
     }
 
     return response()->json(['message' => 'Selected bookings assigned successfully.']);
+}
+
+function assingbookingpickupagent(Request $request){
+
+    $request->validate([
+        'assigned_pickup_id'=>"required",
+        'id'=>"required",
+    ]);
+
+    $booking = Service::findOrFail($request->id);
+    if($booking){
+        $booking->assigned_pickup_id = $request->assigned_pickup_id;
+        $booking->status = 'assigned_to_pickup';
+        $booking->save();
+        return response()->json(['success'=>"Booking assing to pickup "]);
+    }
+
+}
+
+function  assingbookingtechnician(Request $request){
+     $booking = Service::findOrFail($request->id);
+    if($booking){
+        $booking->assigned_technician_id = $request->assigned_technician_id;
+        $booking->status = 'assigned_to_technician';
+        $booking->save();
+        return response()->json(['success'=>"Booking assing to Technicain "]);
+    }
+}
+
+function bookingpickup($id){
+   $booking = Service::findOrFail($id);
+   if($booking){
+     $booking->status = 'picked_up';
+        $booking->save();
+
+        return back();
+   }
+
+}
+function bookingInProgress($id){
+      $booking = Service::findOrFail($id);
+     if($booking){
+     $booking->status = 'in_progress';
+        $booking->save();
+
+        return back();
+   }
+}
+function bookingcompleted($id){
+     $booking = Service::findOrFail($id);
+     if($booking){
+     $booking->status = 'completed';
+        $booking->save();
+
+        return back();
+   }
 }
 
 }

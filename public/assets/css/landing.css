@@ -12,9 +12,9 @@ body {
 
 :root {
   --bs-body-bg: #f4f7fa;
-  --bs-body-bg-rgb: 244, 247, 250;
+  --bs-body-bg-rgb: #244, #247, #250;
   --pc-heading-color: #1d2630;
-  --pc-active-background: #f3f5f7;
+  --pc-active-background: #0a84ff;
   --pc-sidebar-background: #3f4d67;
   --pc-sidebar-color: #a9b7d0;
   --pc-sidebar-color-rgb: 169, 183, 208;
@@ -25,11 +25,11 @@ body {
   --pc-sidebar-caption-color: #e8edf7;
   --pc-sidebar-border: none;
   --pc-header-background: rgba(var(--bs-body-bg-rgb), 0.7);
-  --pc-header-color: #5b6b79;
+  --pc-header-color: #095292;
   --pc-header-shadow: none;
   --pc-card-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-  --pc-header-submenu-background: #ffffff;
-  --pc-header-submenu-color: #5b6b79;
+  --pc-header-submenu-background: #d43c3c;
+  --pc-header-submenu-color: #bcc3c9;
 }
 
 [data-pc-sidebar_theme=true] {

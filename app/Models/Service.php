@@ -23,6 +23,8 @@ class Service extends Model
         'cost',
         'booking_id',
         'service',
+        'service_type',
+        'bikenumber'
 
     ];
  public function user()
