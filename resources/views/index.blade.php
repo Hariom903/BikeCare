@@ -299,8 +299,8 @@
                                         <option disabled selected>-Select Service-</option>
                                         <option value="Basic Service">Basic Service</option>
                                         <option value="Standard Service">Standard Service</option>
-                                        <option value="Premium Service">Premium Service</option>
-                                        <option value="Repair Service">Repair Service</option>
+                                        <option value="Custom Service">Custom Service</option>
+
                                     </select>
                                     @error('issues')
                                         <div class="error">

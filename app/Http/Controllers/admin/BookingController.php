@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
  public function index(){
-    $bookings = Service::with('user')->get();
+   $bookings = Service::with(['pickupAgent', 'technician'])->get();
     // echo "<pre>";
     // print_r($bookings); die();
-    $managers = User::where('role','serviceManager')
-    ->get();
-    return view('admin.booking',compact('bookings','managers'));
+    // $managers = User::where('role','serviceManager')
+    // ->get();
+    return view('admin.booking',compact('bookings'));
  }
 
  public function assignAjax(Request $request){

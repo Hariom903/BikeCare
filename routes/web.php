@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BookingController;
+use App\Http\Controllers\admin\ManageBookingController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PickupAgentController;
@@ -32,9 +34,24 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Dashboard home
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard')->middleware('role:admin');
+    Route::prefix('admin/')->middleware('role:admin')->group(function(){
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::get('booking', [BookingController::class, 'index'])->name('booking');
     Route::post('bookings/assign-ajax', [BookingController::class, 'assignAjax'])->name('bookings.assign.ajax');
+    Route::get('managebooking/{id}', [ManageBookingController::class, 'index'])->name('managebooking');
+    Route::post('managebooking/assignpickupagent', [ManageBookingController::class, 'assignPickupAgent'])->name('managebooking.assignpickupagent');
+    Route::post('managebooking/assigntechnician', [ManageBookingController::class, 'assignTechnician'])->name('managebooking.assigntechnician');
+// Mark as Picked Up
+    Route::post('booking/pickup/{id}', [ManageBookingController::class, 'bookingpickup'])->name('booking.pickup');
+    // Mark as In Progress
+    Route::post('booking/in_progress/{id}', [ManageBookingController::class, 'bookingInProgress'])->name('booking.in_progress');
+    // Mark as Completed
+    Route::post('booking/completed/{id}', [ManageBookingController::class, 'bookingcompleted'])->name('booking.completed');
+    ///Generate Bill
+    Route::post('booking/generatebill/{id}', [BillController::class, 'index'])->name('booking.generatebill');
+
+
+
 
     // Manage Users
     Route::get('manageuser', [UserController::class, 'index'])->name('manageuser');
@@ -42,6 +59,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('manageuser/{id}', [UserController::class, 'manageuser'])->name('manageuser.edit');
     Route::post('updateuser/{id}', [UserController::class, 'update'])->name('updateuser');
     Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name('deleteuser');
+    });
+
 
     // Inventory
     Route::get('inventory', [InventoryController::class, 'index'])->name('inventory');
@@ -58,7 +77,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('servicemanager', [ServicemanagerController::class, 'index'])->name('servicemanager');
 
     // Receptionist
-    Route::get('receptionist', [ReceptionistController::class, 'index'])->name('receptionist');
+    Route::get('receptionist', [BookingController::class, 'index'])->name('receptionist');
 
     // Assign Booking
     Route::post('assignbooking/pickupagent', [BookingController::class, 'assingbookingpickupagent'])->name('assignbooking.pickupagent');

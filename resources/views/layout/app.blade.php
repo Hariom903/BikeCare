@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,  minimal-ui" />
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/images/OIP.jpg') }}" type="image/x-icon" />
     <!-- [Font] Family -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <!-- [Feather Icons] https://feathericons.com -->

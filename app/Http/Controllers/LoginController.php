@@ -31,7 +31,7 @@ class LoginController extends Controller
         case 'receptionist':
             return redirect()->intended('/dashboard/receptionist');
         case 'inventoryManager':
-            return redirect()->intended('/dashboard/inventorymanager');
+            return redirect()->intended('/dashboard/inventory');
         case 'picupAgent':
             return redirect()->intended('/dashboard/pickupagent');
         case 'accountant':

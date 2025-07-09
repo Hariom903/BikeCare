@@ -165,7 +165,7 @@
     var id = document.getElementById('booking_id').value;
 
     $.ajax({
-        url: "{{ route('assingbooking.pickupagent') }}",
+        url: "{{--  --}}",
         type: "POST",
         data: {
             "_token": "{{ csrf_token() }}",
@@ -187,7 +187,7 @@ function updatebookingfortechnician(){
     var id = document.getElementById('booking_id').value;
 
     $.ajax({
-        url: "{{ route('assingbooking.technician') }}",
+        url: "{{--  --}}",
         type: "POST",
         data: {
             "_token": "{{ csrf_token() }}",

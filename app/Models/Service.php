@@ -31,5 +31,11 @@ class Service extends Model
 {
     return $this->belongsTo(User::class,'assigned_manager_id');
 }
+public function pickupAgent(){
+    return $this->belongsTo(User::class,'assigned_pickup_id');
+}
+public function technician(){
+    return $this->belongsTo(User::class,'assigned_technician_id');
+}
 
 }
