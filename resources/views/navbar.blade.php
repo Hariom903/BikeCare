@@ -39,10 +39,7 @@
                             <span class="pc-mtext">Manage User</span>
                         </a>
                     </li>
-                @endif
 
-                {{-- Bookings (admin & receptionist) --}}
-                @if(in_array($role, ['admin', 'receptionist']))
                     <li class="pc-item">
                         <a href="{{ route('booking') }}" class="pc-link">
                             <span class="pc-micon"><i data-feather="calendar"></i></span>
@@ -53,12 +50,18 @@
 
                 {{-- Inventory (admin & inventoryManager) --}}
                 @if(in_array($role, ['admin', 'inventoryManager']))
-                    <li class="pc-item">
-                        <a href="{{ route('inventory') }}" class="pc-link">
-                            <span class="pc-micon"><i class="fa-solid fa-truck-moving"></i></span>
-                            <span class="pc-mtext">Add Inventory</span>
-                        </a>
-                    </li>
+                <li class="pc-item">
+                    <a href="{{ route('inventory') }}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-truck-moving"></i></span>
+                        <span class="pc-mtext">Add Inventory</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{{ route('addItemBill') }}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-card"></i></span>
+                            <span class="pc-mtext">Add To Bill</span>
+                    </a>
+                </li>
                 @endif
 
                 {{-- Accountant --}}
@@ -72,13 +75,14 @@
                 @endif
 
                 {{-- Receptionist --}}
-                @if($role === 'receptionist')
+                 @if($role === 'receptionist')
                     <li class="pc-item">
                         <a href="{{ route('receptionist') }}" class="pc-link">
                             <span class="pc-micon"><i class="fa-solid fa-money-bills"></i></span>
                             <span class="pc-mtext">Receptionist</span>
                         </a>
                     </li>
+                   
                 @endif
 
                 {{-- Technician --}}

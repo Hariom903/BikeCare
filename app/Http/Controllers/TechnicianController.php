@@ -15,4 +15,19 @@ class TechnicianController extends Controller
           ->get();
         return view('technician',compact('bookings'));
     }
+
+
+public function markInProgress(Service $booking)
+{
+
+    $booking->update(['status' => 'in_progress']);
+    return back()->with('success', 'Booking marked as In Progress');
 }
+
+public function markCompleted(Service $booking)
+{
+    $booking->update(['status' => 'completed']);
+    return back()->with('success', 'Booking marked as Completed');
+}
+}
+

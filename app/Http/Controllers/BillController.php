@@ -20,4 +20,13 @@ class BillController extends Controller
 
       return view('genratebill' , compact('booking','inventories'));
     }
+
+    
+    public function addItemBill(){
+
+        $inventories = Product::with('ProductVariant')->get();
+
+        return view('add_to_bill', compact('inventories'));
+    }
+
 }

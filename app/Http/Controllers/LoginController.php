@@ -25,13 +25,13 @@ class LoginController extends Controller
     switch ($role) {
         case 'admin':  return redirect()->intended('dashboard');
         case 'serviceManager':
-            return redirect()->intended('/dashboard/servicemanager');
+            return redirect()->route('servicemanager');
         case 'technician':
-            return redirect()->intended('/dashboard/technician');
+            return redirect()->route('technician');
         case 'receptionist':
-            return redirect()->intended('/dashboard/receptionist');
+            return redirect()->route('receptionist');
         case 'inventoryManager':
-            return redirect()->intended('/dashboard/inventory');
+            return redirect()->route('inventory');
         case 'picupAgent':
             return redirect()->intended('/dashboard/pickupagent');
         case 'accountant':
