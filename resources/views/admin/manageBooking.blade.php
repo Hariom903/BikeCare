@@ -233,6 +233,12 @@
                 <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                 <button type="submit" class="btn mt-3 mb-3 btn-success">Generate Invoice</button>
             </form>
+
+            <form action="{{ route('booking.additionalOpretionParts') }}" method="GET" class="pb-2 d-inline">
+                @csrf
+                <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                <button type="submit" class="btn mt-3 mb-3 btn-success">Add Additional Opretion Parts</button>
+            </form>
         @endif
 
 

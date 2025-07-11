@@ -58,8 +58,14 @@
                 </li>
                 <li class="pc-item">
                     <a href="{{ route('addItemBill') }}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-card"></i></span>
-                            <span class="pc-mtext">Add To Bill</span>
+                        <span class="pc-micon"><i class="fa-solid fa-code-compare"></i></span>
+                            <span class="pc-mtext"> Add Spare Parts   </span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{{ route('partassignaechnician') }}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-tools"></i></span>
+                            <span class="pc-mtext">partassignaechnician</span>
                     </a>
                 </li>
                 @endif
@@ -82,7 +88,12 @@
                             <span class="pc-mtext">Receptionist</span>
                         </a>
                     </li>
-                   
+                  {{-- <li class="pc-item">
+                    <a href="{{ route('addItemBill.receptionist') }}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-code-compare"></i></span>
+                            <span class="pc-mtext"> Add Spare Parts   </span>
+                    </a> --}}
+                </li>
                 @endif
 
                 {{-- Technician --}}

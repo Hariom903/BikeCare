@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\oprationPart;
+use App\Models\Partassigntechnician;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ManageBookingController extends Controller
 {
@@ -103,5 +106,63 @@ class ManageBookingController extends Controller
         }
     }
 
+function additionalOpretionParts(Request $request){
+         $id = $request->input('booking_id');
+        if (!$id) {
+            return redirect()->back()->with('error', 'Please select a booking.');
+        }
+        $booking = Service::findOrFail($id);
+
+       $technician_id = $booking->assigned_technician_id;
+
+        if (!$technician_id) {
+            return redirect()->back()->with('error', 'Please assign a technician to the booking.');
+        }
+        // Fetch the operation parts assing to technician  for the booking
+      $technicianParts = Partassigntechnician::with('productVariant', 'productVariant.product')
+            ->where('technician_id', $technician_id)
+            ->get();
+              $operationParts = oprationPart:: with('productVariant', 'productVariant.product')
+                ->where('booking_id', $booking->id)->get();
+
+
+        return view('AddaadditionalOpretionParts', compact('booking','technicianParts', 'operationParts'));
+
+
+}
+function storeAdditionalOpretionParts(Request $request){
+
+    // Validate the request data
+    $request->validate([
+        'booking_id' => 'required|exists:services,id',
+        'items' => 'required|array',
+    ]);
+
+    $booking = Service::findOrFail($request->booking_id);
+    $items = $request->items;
+
+    foreach ($items as $item) {
+        $total = 0;
+        $Partassigntechnician = Partassigntechnician::findOrFail($item['variant_id']);
+        $quantity = $item['quantity'];
+       $Partassigntechnician->quantity -= $quantity;
+        $Partassigntechnician->update();
+
+
+        // Update inventory
+        // Create a new operation part record
+        $operationPart = new oprationPart();
+        $operationPart->booking_id = $booking->id;
+        $operationPart->product_variant_id = $Partassigntechnician->product_variant_id;
+        $operationPart->quantity = $quantity;
+        $operationPart->price = $Partassigntechnician->price;
+        $operationPart->total = $Partassigntechnician->price * $quantity;
+        $operationPart->created_by = Auth::user()->id;
+        $operationPart->save();
+    }
+
+    return redirect()->back()->with('success', 'Additional operation parts added successfully.');
+
+}
 
 }

@@ -1,10 +1,9 @@
-
 @extends('layout.app')
 @section('main')
 
+
 <div class="container pt-4">
-    <h3 style="color:darkgreen; font-weight:bold">🧾 Add Parts to Bill</h3>
-    <p>For Vehicle: <strong>{{ $booking->bikenumber }}</strong> (Service: {{ $booking->service }})</p>
+
 
     {{-- Success & error alerts --}}
     @if(session('success'))
@@ -14,15 +13,14 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form action="{{route('bill.addItems')}}" method="POST" id="billForm">
+    <form action="{{ route('partassignaechnician.store')}}" method="POST" id="billForm">
         @csrf
 
-        <input type="hidden" name="booking_id" value="{{ $booking->id }}">
 
         <div id="itemRows">
             <div class="row g-3 mb-2 itemRow">
                 {{-- Product Variant --}}
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label class="form-label">Product Variant</label>
                     <select name="items[0][variant_id]" class="form-select" required>
                         <option value="">-- Select Product Variant --</option>
@@ -35,6 +33,21 @@
                         @endforeach
                     </select>
                 </div>
+                {{--  --}}
+                  <div class="col-md-3">
+                    <label class="form-label"> Technician Select </label>
+                    <select name="items[0][technician_id]" class="form-select" required>
+                        <option value="">-- Select Technician--</option>
+                        @foreach ($technicians as $technician)
+
+                            <option value="{{ $technician->id }}">
+                                {{ $technician->name }}
+                            </option>
+
+                        @endforeach
+                    </select>
+                </div>
+
 
                 {{-- Quantity --}}
                 <div class="col-md-3">
@@ -60,7 +73,7 @@
 </div>
  {{-- old opretion part list  --}}
 
- <div class="container mt-5">
+ {{-- <div class="container mt-5">
     <h4>Existing Operation Parts</h4>
     @if($operationParts->isEmpty())
         <p>No operation parts added yet.</p>
@@ -70,24 +83,13 @@
                 <tr>
                     <th>Product Variant</th>
                     <th>Quantity</th>
-                    <th>Rate </th>
-                    <th>Taxable  </th>
-                    <th>SGST</th>
-                    <th>Rate</th>
-                    <th>CGST</th>
-                    <th>Rate</th>
-                    <th>MRP  </th>
+                    <th>Price</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $totalwithGST = 0;
-                @endphp
                 @foreach($operationParts as $part)
-                    @php
-                        $total = $part->total + ($part->total * $part->productVariant->SGST) / 100 + ($part->total * $part->productVariant->CGST) / 100;
-                        $totalwithGST += $total;
-                    @endphp
+
                     <tr>
                         <td>
                             {{ $part->productVariant->product->name }} —
@@ -96,21 +98,15 @@
                         <td>{{ $part->quantity }}</td>
                         <td>₹{{ $part->price }}</td>
                         <td>₹{{ $part->total}}</td>
-
-                        <td>{{ $part->productVariant->SGST }} %</td>
-                        <td>₹{{  ($part->productVariant->SGST * $part->total) / 100 }}</td>
-                        <td>{{ $part->productVariant->CGST }} %</td>
-                        <td>₹{{  ($part->productVariant->CGST * $part->total) / 100 }}</td>
-                        <td>₹{{  $total  }}</td>
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="8" class="text-end"><strong>Total:</strong></td>
-                    <td>₹{{ $totalwithGST }}</td>
+                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                    <td>₹{{ $operationParts->sum('total')  }}</td>
             </tbody>
         </table>
     @endif
-</div>
+</div> --}}
 
 <script>
 let rowIndex = 1;
@@ -146,3 +142,5 @@ document.addEventListener('click', function(e) {
 </script>
 
 @endsection
+
+

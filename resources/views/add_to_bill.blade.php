@@ -2,7 +2,7 @@
 @section('main')
 <h3>Add Item to Bill pls select Vehicle  </h3>
  <div class="container pt-4">
-    <form action="{{ route('add-item-bill')}}" method="GET">
+    <form action="{{  route('add-item-bill')}}" method="GET">
          {{-- error message   --}}
             @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>

@@ -14,7 +14,7 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form action="{{route('bill.addItems')}}" method="POST" id="billForm">
+    <form action="{{route('booking.additionalOpretionParts.store')}}" method="POST" id="billForm">
         @csrf
 
         <input type="hidden" name="booking_id" value="{{ $booking->id }}">
@@ -26,12 +26,27 @@
                     <label class="form-label">Product Variant</label>
                     <select name="items[0][variant_id]" class="form-select" required>
                         <option value="">-- Select Product Variant --</option>
-                        @foreach ($inventories as $product)
-                            @foreach ($product->ProductVariant as $variant)
-                                <option value="{{ $variant->id }}">
-                                    {{ $product->name }} — {{ $variant->size_or_type }} {{ $variant->unit }} — ₹{{ $variant->unit_price }} — Stock: {{ $variant->quantity_in_stock }}
+                        @foreach ($technicianParts as $technicianPart)
+
+                        @if ($technicianPart->quantity <= 0)
+                            <option value="" disabled>
+                                {{ $technicianPart->productVariant->product->name }} —
+                                {{ $technicianPart->productVariant->size_or_type }}
+                                {{ $technicianPart->productVariant->unit }} —
+                                Out of Stock
+                            </option>
+
+                        @else
+
+                              <option value="{{ $technicianPart->id }}">
+                                    {{ $technicianPart->productVariant->product->name }} —
+                                    {{ $technicianPart->productVariant->size_or_type }}
+                                    {{ $technicianPart->productVariant->unit }} —
+                                   Unit Technician Assing   {{ $technicianPart->quantity }}
+                                  Per Unit Price   (₹{{ $technicianPart->price }})
+
                                 </option>
-                            @endforeach
+                        @endif
                         @endforeach
                     </select>
                 </div>
@@ -39,7 +54,7 @@
                 {{-- Quantity --}}
                 <div class="col-md-3">
                     <label class="form-label">Quantity</label>
-                    <input type="number" name="items[0][quantity]" class="form-control" placeholder="Qty" min="1" required>
+                    <input type="number" name="items[0][quantity]" class="form-control" placeholder="Qty" min="1" max="{{ $technicianPart->quantity}}" required>
                 </div>
 
                 {{-- Remove button --}}

@@ -54,6 +54,8 @@
                             </div>
                         </div>
                     </form>
+
+
                     <form action="{{ route('productvariant.store') }}" method="POST">
                         @csrf
                         <h3 class="h3 fw-bold pt-4 pb-2  "> Add Product </h3>
@@ -102,6 +104,22 @@
                                     <div class="error"> {{ $message }} </div>
                                 @enderror
                             </div>
+                            <div class="col-sm-2 col-12 mb-3">
+                                <label for="CGST" clsss="form-lable"> CGST </label>
+                                <input type="number" class="form-control" name="CGST" placeholder="Enter CGST"
+                                    value="{{ old('CGST') }}">
+                                @error('CGST')
+                                    <div class="error"> {{ $message }} </div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-2 col-12 mb-3">
+                                <label for="SGST" clsss="form-lable"> SGST </label>
+                                <input type="number" class="form-control" name="SGST" placeholder="Enter SGST"
+                                    value="{{ old('SGST') }}">
+                                @error('SGST')
+                                    <div class="error"> {{ $message }} </div>
+                                @enderror
+                            </div>
                             <div class=" col-12 mb-3">
                                 <button class="btn btn-primary"> Add Product </button>
                             </div>
@@ -128,6 +146,11 @@
                                     </th>
                                     <th>Unit Price
                                     </th>
+                                    <th>CGST
+                                    </th>
+                                    <th>SGST
+                                    </th>
+
                                     <th> Action
                                     </th>
 
@@ -145,9 +168,11 @@
                                         <td> {{ $productsvariant->unit }} </td>
                                         <td> {{ $productsvariant->quantity_in_stock }} </td>
                                         <td> {{ $productsvariant->unit_price }} </td>
+                                        <td> {{ $productsvariant->CGST }} % </td>
+                                        <td> {{ $productsvariant->SGST }} % </td>
                                         <td>
                                             <button class="btn btn-primary"
-                                                onclick="openEditModal( {{ $productsvariant->id }},'{{ $productsvariant->product->name }}','{{ $productsvariant->product->category }}','{{ $productsvariant->product->brand }}','{{ $productsvariant->size_or_type }}','{{ $productsvariant->unit }}','{{ $productsvariant->quantity_in_stock }}','{{ $productsvariant->unit_price }}')">
+                                                onclick="openEditModal( {{ $productsvariant->id }},'{{ $productsvariant->product->name }}','{{ $productsvariant->product->category }}','{{ $productsvariant->product->brand }}','{{ $productsvariant->size_or_type }}','{{ $productsvariant->unit }}','{{ $productsvariant->quantity_in_stock }}','{{ $productsvariant->unit_price }}',{{ $productsvariant->CGST }},{{ $productsvariant->SGST }})">
                                                 Update
                                             </button>
                                     </tr>
@@ -207,11 +232,19 @@
                             <label>Quantity in Old  stock</label>
                             <input type="text" id="editquantity_in_stock" readonly class="form-control">
                         </div>
+
+                        <div class="mb-3">
+                            <label>CGST</label>
+                            <input type="text" id="editCGST" class="form-control" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label>SGST</label>
+                            <input type="text" id="editSGST" class="form-control" readonly>
+                        </div>
                         <div class="mb-3">
                             <label>Quantity in new stock</label>
                             <input type="text" id="addquantity_in_stock"  class="form-control">
                         </div>
-
                         <div class="mb-3">
                             <label>Unit Price</label>
                             <input type="text" id="editunit_price" class="form-control">
@@ -236,7 +269,7 @@
  const editModal = new bootstrap.Modal(editModalEl);
 
 // Function to open modal & fill data
-function openEditModal(id,editname,editcategory,editbrand,editsize_type,editunit,editquantity_in_stock,editunit_price) {
+function openEditModal(id,editname,editcategory,editbrand,editsize_type,editunit,editquantity_in_stock,editunit_price, CGST, SGST) {
        document.getElementById('editId').value = id
        document.getElementById('editname').value = editname
        document.getElementById('editcategory').value = editcategory
@@ -245,6 +278,9 @@ function openEditModal(id,editname,editcategory,editbrand,editsize_type,editunit
        document.getElementById('editunit').value = editunit
        document.getElementById('editquantity_in_stock').value = editquantity_in_stock
        document.getElementById('editunit_price').value = editunit_price
+         document.getElementById('editCGST').value = CGST
+         document.getElementById('editSGST').value = SGST
+
 
   editModal.show();
 }

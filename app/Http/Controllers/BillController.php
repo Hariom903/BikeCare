@@ -9,24 +9,24 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    public function index($id){
-        // Fetch the booking details using the ID
-        $booking = Service::findOrFail($id);
-        // Fetch the inventory items from the database
-      $inventories = Product::with('ProductVariant')->get();
-//    echo "<pre>";
-//     print_r($inventories);
-//     die();
+//     public function index($id){
+//         // Fetch the booking details using the ID
+//         $booking = Service::findOrFail($id);
+//         // Fetch the inventory items from the database
+//       $inventories = Product::with('ProductVariant')->get();
+// //    echo "<pre>";
+// //     print_r($inventories);
+// //     die();
 
-      return view('genratebill' , compact('booking','inventories'));
-    }
+//       return view('genratebill' , compact('booking','inventories'));
+//     }
 
-    
-    public function addItemBill(){
 
-        $inventories = Product::with('ProductVariant')->get();
+//     public function addItemBill(){
 
-        return view('add_to_bill', compact('inventories'));
-    }
+//         $inventories = Product::with('ProductVariant')->get();
 
-}
+//         return view('add_to_bill', compact('inventories'));
+//     }
+
+ }

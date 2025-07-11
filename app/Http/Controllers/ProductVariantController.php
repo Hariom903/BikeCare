@@ -16,6 +16,8 @@ class ProductVariantController extends Controller
         'unit'=>"required",
         'quantity_in_stock'=>"required||numeric",
         'unit_price'=>"required||numeric",
+        'SGST'=>"numeric||nullable",
+        'CGST'=>"numeric||nullable",
     ]);
 
     $res = ProductVariant::create($validate);

@@ -12,6 +12,8 @@ class ProductVariant extends Model
         'unit',
         'quantity_in_stock',
         'unit_price',
+        'SGST',
+        'CGST',
 
     ];
 
