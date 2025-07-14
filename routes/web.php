@@ -4,14 +4,14 @@ use App\Http\Controllers\addToBillController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BookingController;
 use App\Http\Controllers\admin\ManageBookingController;
-use App\Http\Controllers\BillController;
+use App\Http\Controllers\BillinvoiceController;
+use App\Http\Controllers\GenrateBillContoller;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PartassigntechnicianController;
 use App\Http\Controllers\PickupAgentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariantController;
-use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicemanagerController;
 use App\Http\Controllers\TechnicianController;
@@ -55,10 +55,15 @@ Route::post('booking/in_progress/{id}', [ManageBookingController::class, 'bookin
 // Mark as Completed
 Route::post('booking/completed/{id}', [ManageBookingController::class, 'bookingcompleted'])->name('booking.completed');
 ///Generate Bill
-Route::post('booking/generatebill/{id}', [BillController::class, 'index'])->name('booking.generatebill');
 Route::GET('additionalOpretionParts',[ManageBookingController::class, 'additionalOpretionParts'])->name('booking.additionalOpretionParts');
 Route::post('additionalOpretionParts/store',[ManageBookingController::class, 'storeAdditionalOpretionParts'])->name('booking.additionalOpretionParts.store');
 
+
+// Generate Bill
+Route::get('genratebill/{id}', [GenrateBillContoller::class, 'index'])->name('genratebill');
+Route::post('genratebill/store', [GenrateBillContoller::class, 'storeGenrateBill'])->name('genratebill.store');
+
+Route::get('bill/invocie/{id}',[BillinvoiceController::class,'index'])->name('bill.invoice');
 
 
 

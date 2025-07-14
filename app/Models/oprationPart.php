@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class oprationPart extends Model
+class OprationPart extends Model
 {
      protected $table = 'opration_parts';
      protected $fillable = [

@@ -227,11 +227,11 @@
                 <button type="submit" class="btn mt-3 mb-3 btn-success">Mark as Completed</button>
             </form>
         @endif
-        @if ($booking->status === 'completed')
-            <form action="{{--  --}}" method="get" class="pb-2  d-inline">
+        @if ($booking->status === 'completed' && $booking->bill_status == 0)
+            <form action="{{route('genratebill',$booking->id)}}" method="get" class="pb-2  d-inline">
                 @csrf
-                <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                <button type="submit" class="btn mt-3 mb-3 btn-success">Generate Invoice</button>
+
+                <button type="submit" class="btn mt-3 mb-3 btn-success">Generate Bill</button>
             </form>
 
             <form action="{{ route('booking.additionalOpretionParts') }}" method="GET" class="pb-2 d-inline">
@@ -239,9 +239,10 @@
                 <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                 <button type="submit" class="btn mt-3 mb-3 btn-success">Add Additional Opretion Parts</button>
             </form>
-        @endif
+             @elseif($booking->status === 'completed' && $booking->bill_status == 1)
 
-
+                <a href="{{ route('bill.invoice',$booking->id) }}" class="btn mt-3 mb-3 btn-success"> View Bill </a>
+             @endif
     </div>
     </div>
 @endsection

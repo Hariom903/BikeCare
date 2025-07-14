@@ -70,7 +70,7 @@
                 <tr>
                     <th>Product Variant</th>
                     <th>Quantity</th>
-                    <th>Rate </th>
+                    <th>Price </th>
                     <th>Taxable  </th>
                     <th>SGST</th>
                     <th>Rate</th>
@@ -81,13 +81,10 @@
             </thead>
             <tbody>
                 @php
-                    $totalwithGST = 0;
+
                 @endphp
                 @foreach($operationParts as $part)
-                    @php
-                        $total = $part->total + ($part->total * $part->productVariant->SGST) / 100 + ($part->total * $part->productVariant->CGST) / 100;
-                        $totalwithGST += $total;
-                    @endphp
+
                     <tr>
                         <td>
                             {{ $part->productVariant->product->name }} —
@@ -95,18 +92,18 @@
                         </td>
                         <td>{{ $part->quantity }}</td>
                         <td>₹{{ $part->price }}</td>
-                        <td>₹{{ $part->total}}</td>
+                        <td>₹{{$part->taxable}}</td>
 
-                        <td>{{ $part->productVariant->SGST }} %</td>
-                        <td>₹{{  ($part->productVariant->SGST * $part->total) / 100 }}</td>
+                        <td>{{ $part->productVariant->SGST }} %  </td>
+                        <td>₹{{  ($part->productVariant->SGST * $part->taxable) / 100 }}</td>
                         <td>{{ $part->productVariant->CGST }} %</td>
-                        <td>₹{{  ($part->productVariant->CGST * $part->total) / 100 }}</td>
-                        <td>₹{{  $total  }}</td>
+                        <td>₹{{  ($part->productVariant->CGST * $part->taxable) / 100 }}</td>
+                        <td>₹{{  $part->MRP   }}</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="8" class="text-end"><strong>Total:</strong></td>
-                    <td>₹{{ $totalwithGST }}</td>
+                    <td>₹{{ $operationParts->sum('MRP') }}</td> </tr>
             </tbody>
         </table>
     @endif

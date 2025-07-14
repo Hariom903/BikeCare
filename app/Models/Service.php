@@ -38,4 +38,11 @@ public function technician(){
     return $this->belongsTo(User::class,'assigned_technician_id');
 }
 
+public function bills(){
+    return $this->hasOne(Bill::class,'booking_id');
+}
+
+public function opretionPart(){
+   return $this->hasMany(oprationPart::class,'booking_id');
+}
 }

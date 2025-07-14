@@ -49,14 +49,18 @@ class AddToBillController extends Controller
         $items = $request->items;
         foreach ($items as $item) {
             $total = 0;
+            $taxable = 0;
             $productVariant = ProductVariant::findOrFail($item['variant_id']);
             $quantity = $item['quantity'];
+            $CGST = $productVariant->CGST;
+            $SGST = $productVariant->SGST;
             // update inventory
             $productVariant->quantity_in_stock -= $quantity;
             $productVariant->update();
 
             $price = $productVariant->unit_price;
-            $total += $price * $quantity;
+            $taxable += $price * $quantity;
+            $total += $taxable + ($taxable*$CGST/100) +( $taxable*$SGST/100 );
 
             // Create a new operation part record
             $operationPart = new oprationPart();
@@ -65,7 +69,9 @@ class AddToBillController extends Controller
             $operationPart->product_variant_id = $item['variant_id'];
             $operationPart->quantity = $quantity;
             $operationPart->price = $price;
-            $operationPart->total = $total;
+            $operationPart->taxable = $taxable;
+            $operationPart->MRP = $total;
+            // $operationPart->
             $operationPart->created_by =Auth::user()->id;
             $operationPart->save();
         }

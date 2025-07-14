@@ -143,20 +143,25 @@ function storeAdditionalOpretionParts(Request $request){
 
     foreach ($items as $item) {
         $total = 0;
-        $Partassigntechnician = Partassigntechnician::findOrFail($item['variant_id']);
+        $Partassigntechnician = Partassigntechnician::with('productVariant')
+        ->findOrFail($item['variant_id']);
         $quantity = $item['quantity'];
+        $SGST = $Partassigntechnician->productVariant->SGST;
+        $CGST = $Partassigntechnician->productVariant->CGST;
        $Partassigntechnician->quantity -= $quantity;
         $Partassigntechnician->update();
 
 
-        // Update inventory
+
         // Create a new operation part record
         $operationPart = new oprationPart();
         $operationPart->booking_id = $booking->id;
         $operationPart->product_variant_id = $Partassigntechnician->product_variant_id;
         $operationPart->quantity = $quantity;
         $operationPart->price = $Partassigntechnician->price;
-        $operationPart->total = $Partassigntechnician->price * $quantity;
+        $operationPart->taxable = $Partassigntechnician->price * $quantity;
+        $operationPart->MRP =$Partassigntechnician->price * $quantity + ( ($Partassigntechnician->price * $quantity)* $SGST /100 ) +(($Partassigntechnician->price * $quantity)* $CGST /100);
+       
         $operationPart->created_by = Auth::user()->id;
         $operationPart->save();
     }
