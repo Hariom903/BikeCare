@@ -28,7 +28,7 @@
                 <td>{{ $booking->booking_id }}</td>
                 <td>{{ $booking->customerName }}<br>{{ $booking->phone }}</td>
                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeModel }}<br>Year: {{ $booking->year }}<br>No: {{ $booking->bikenumber }}</td>
-                <td>{{ $booking->service_type }}<br>{{ $booking->issues }}</td>
+                <td>{{ $booking->service }}<br>{{ $booking->issues }}</td>
                 <td>{{ $booking->preferredDate }}<br>{{ $booking->preferredTime }}</td>
                 <td>
                     <span class="badge

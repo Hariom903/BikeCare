@@ -15,7 +15,7 @@ class ManageBookingController extends Controller
   public function index($id)
   {
     // Fetch the booking details using the ID
-    $booking = Service::with(['pickupAgent', 'technician'])
+    $booking = Service::with(['pickupAgent','bills', 'technician'])
                       ->where('id', $id)
                       ->firstOrFail();
 
@@ -93,18 +93,7 @@ class ManageBookingController extends Controller
 
     }
     // generateBill
-    public function generateBill($id)
-    {
-        $booking = Service::findOrFail($id);
-        if ($booking) {
-            // Logic to generate bill
-            // This could involve calculating costs, taxes, etc.
-            // For now, we'll just mark the booking as billed
-            // $booking->status = 'billed';
-            $booking->save();
-            return back()->with(['success' => "Bill generated for booking"]);
-        }
-    }
+
 
 function additionalOpretionParts(Request $request){
          $id = $request->input('booking_id');
@@ -161,7 +150,7 @@ function storeAdditionalOpretionParts(Request $request){
         $operationPart->price = $Partassigntechnician->price;
         $operationPart->taxable = $Partassigntechnician->price * $quantity;
         $operationPart->MRP =$Partassigntechnician->price * $quantity + ( ($Partassigntechnician->price * $quantity)* $SGST /100 ) +(($Partassigntechnician->price * $quantity)* $CGST /100);
-       
+
         $operationPart->created_by = Auth::user()->id;
         $operationPart->save();
     }

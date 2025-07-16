@@ -64,7 +64,7 @@ Route::get('genratebill/{id}', [GenrateBillContoller::class, 'index'])->name('ge
 Route::post('genratebill/store', [GenrateBillContoller::class, 'storeGenrateBill'])->name('genratebill.store');
 
 Route::get('bill/invocie/{id}',[BillinvoiceController::class,'index'])->name('bill.invoice');
-
+Route::post('bill/invocie/{id}',[BillinvoiceController::class,'download'])->name('billinvoice.download');
 
 
 

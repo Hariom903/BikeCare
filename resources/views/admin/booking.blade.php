@@ -52,7 +52,7 @@
                             <th>Date & Time</th>
                             <th>Status</th>
                             <th>Service Type</th>
-                            <th>Cost</th>
+
                             <th>Manage Booking </th>
                         </tr>
                     </thead>
@@ -69,7 +69,7 @@
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
                                 <td>{{ $booking->service_type }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     <a href="{{ route('managebooking',$booking->id) }}" class="btn btn-p"> Manage Booking </a>
                                 </td>
@@ -91,7 +91,7 @@
                             <th>Bike & Service</th>
                             <th>Date & Time</th>
                             <th>Status</th>
-                            <th>Cost</th>
+
                             <th> Pickup Agent Name</th>
                             <th> Manage Booking </th>
                         </tr>
@@ -109,7 +109,7 @@
                                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     {{ $booking->pickupAgent->name }}
                                 </td>
@@ -120,12 +120,12 @@
                         @endforeach
                     </tbody>
                 </table>
-
-
-
             </div>
+
+
+
             <div class="tab-pane fade" id="picked_up" role="tabpanel" aria-labelledby="picked_up-tab">
-                <table class="table display myTable" id="myTableAssigned">
+                <table class="table display myTable" id="myTablepicked_up">
                     <thead style=" background-color: rgb(69, 3, 75);">
                         <tr class="text-center">
 
@@ -134,7 +134,7 @@
                             <th>Bike & Service</th>
                             <th>Date & Time</th>
                             <th>Status</th>
-                            <th>Cost</th>
+
                             <th>Pickup Agent Name</th>
                             <th> Manage Booking </th>
                         </tr>
@@ -152,7 +152,7 @@
                                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     {{ $booking->pickupAgent->name ?? ' ' }}
                                 </td>
@@ -168,7 +168,7 @@
 
             </div>
             <div class="tab-pane fade" id="assigned_to_technician" role="tabpanel" aria-labelledby="assigned_to_technician-tab">
-                <table class="table display myTable" id="myTableAssigned">
+                <table class="table display myTable" id="myTableassigned_to_technician">
                     <thead style=" background-color: rgb(69, 3, 75);">
                         <tr class="text-center">
 
@@ -177,7 +177,7 @@
                             <th>Bike & Service</th>
                             <th>Date & Time</th>
                             <th>Status</th>
-                            <th>Cost</th>
+
                             <th>Technician Name</th>
                             <th> Manage Booking </th>
                         </tr>
@@ -195,7 +195,7 @@
                                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     {{ $booking->technician->name ?? ' ' }}
                                 </td>
@@ -211,7 +211,7 @@
 
             </div>
             <div class="tab-pane fade" id="in_progress" role="tabpanel" aria-labelledby="in_progress-tab">
-                <table class="table display myTable" id="myTableAssigned">
+                <table class="table display myTable" id="myTablein_progress">
                     <thead style=" background-color: rgb(69, 3, 75);">
                         <tr class="text-center">
 
@@ -220,7 +220,7 @@
                             <th>Bike & Service</th>
                             <th>Date & Time</th>
                             <th>Status</th>
-                            <th>Cost</th>
+
                             <th>Technician  Name</th>
                             <th> Manage Booking </th>
                         </tr>
@@ -238,7 +238,7 @@
                                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     {{ $booking->technician->name ?? ' ' }}
                                 </td>
@@ -254,7 +254,7 @@
 
             </div>
             <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-                <table class="table display myTable" id="myTableAssigned">
+                <table class="table display myTable" id="myTablecompleted">
                     <thead style=" background-color: rgb(69, 3, 75);">
                         <tr class="text-center">
 
@@ -263,7 +263,7 @@
                             <th>Bike & Service</th>
                             <th>Date & Time</th>
                             <th>Status</th>
-                            <th>Cost</th>
+
                            <th>Pickup Agent Name</th>
                              <th>Technician  Name</th>
                             <th>Manage Booking </th>
@@ -282,7 +282,7 @@
                                 <td>{{ $booking->bikeBrand }} {{ $booking->bikeType }} {{ $booking->year }}</td>
                                 <td>{{ $booking->preferredDate }} {{ $booking->preferredTime }}</td>
                                 <td>{{ $booking->status }}</td>
-                                <td>{{ $booking->cost ?? 'N/A' }}</td>
+
                                 <td>
                                     {{ $booking->pickupAgent->name ?? ' ' }}
                                 </td>
@@ -309,13 +309,18 @@
     <script>
         $(document).ready(function() {
             $('#myTablePending').DataTable({
-
-
+             responsive: true
             });
 
-            $('#myTableAssigned').DataTable();
-            $('#myTableassigned').DataTable();
+            $('#myTableAssigned').DataTable({
+                 responsive: true
+            });
+            $('#myTablepicked_up').DataTable({  responsive: true});
+            $('#myTableassigned_to_technician').DataTable({  responsive: true});
+            $('#myTablein_progress').DataTable({  responsive: true});
+            $('#myTablecompleted').DataTable({  responsive: true});
 
         })
     </script>
+
 @endsection

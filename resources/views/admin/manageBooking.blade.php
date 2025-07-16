@@ -94,53 +94,39 @@
         <div class="p-4 mt-4 rounded shadow border">
             <h3>Billing Information</h3>
             <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">Billing Address</label>
-                    <input type="text" name="billingAddress" class="form-control"
-                        value="{{ $booking->billingAddress ? $booking->billingAddress : 'Not Provided' }}" readonly>
-                </div>
+
                 <div class="col-md-6">
                     <label class="form-label">Billing Date</label>
                     <input type="text" name="billingDate" class="form-control"
-                        value="{{ $booking->billingDate ? $booking->billingDate->format('Y-m-d H:i:s') : 'Not Provided' }}"
+                        value="{{ $booking->bills->created_at ? $booking->bills->created_at->format('Y-m-d H:i:s') : 'Not Provided' }}"
                         readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Invoice Number</label>
                     <input type="text" name="invoiceNumber" class="form-control"
-                        value="{{ $booking->invoiceNumber ? $booking->invoiceNumber : 'Not Generated' }}" readonly>
+                        value="{{ $booking->bills->id ? $booking->bills->id : 'Not Generated' }}" readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Total Amount</label>
                     <input type="text" name="totalAmount" class="form-control"
-                        value="{{ $booking->totalAmount ? '$' . number_format($booking->totalAmount, 2) : 'Not Calculated' }}"
+                        value="{{ $booking->bills->total_amount ? '' . number_format($booking->bills->total_amount, 2) : 'Not Calculated' }}"
                         readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Payment Method</label>
                     <input type="text" name="billingPaymentMethod" class="form-control"
-                        value="{{ $booking->billingPaymentMethod ? $booking->billingPaymentMethod : 'Not Provided' }}"
+                        value="{{ $booking->bills->payment_method ?$booking->bills->payment_method : 'Not Provided' }}"
                         readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Payment Status</label>
                     <input type="text" name="billingPaymentStatus" class="form-control"
-                        value="{{ $booking->billingPaymentStatus ? $booking->billingPaymentStatus : 'Not Provided' }}"
+                        value="{{ $booking->bills->status ? $booking->bills->status : 'Not Provided' }}"
                         readonly>
                 </div>
             </div>
         </div>
-        {{-- Generate Bill  --}}
-        {{-- <div class="p-4 mt-4 rounded shadow border">
-            <h3>Generate Bill</h3>
-            <p>Click the button below to generate a bill for this booking.</p>
-            <form action="{{route('booking.generatebill',$booking->id)}}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success">Generate Bill</button>
-            </form>
-        </div> --}}
-        {{-- Action Buttons --}}
-        {{-- status',['assigned_to_pickup','pending','completed','picked_up','assigned_to_technician','in_progress' --}}
+
         <div class="pt-3 mt-4">
             <a href="{{ route('booking') }}" class="btn btn-secondary">Back to Bookings</a>
             @if ($booking->status !== 'completed')
@@ -227,7 +213,7 @@
                 <button type="submit" class="btn mt-3 mb-3 btn-success">Mark as Completed</button>
             </form>
         @endif
-        @if ($booking->status === 'completed' && $booking->bill_status == 0)
+        @if ($booking->status === 'completed' && !$booking->bills)
             <form action="{{route('genratebill',$booking->id)}}" method="get" class="pb-2  d-inline">
                 @csrf
 
@@ -239,7 +225,7 @@
                 <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                 <button type="submit" class="btn mt-3 mb-3 btn-success">Add Additional Opretion Parts</button>
             </form>
-             @elseif($booking->status === 'completed' && $booking->bill_status == 1)
+             @elseif($booking->status === 'completed' && $booking->bills)
 
                 <a href="{{ route('bill.invoice',$booking->id) }}" class="btn mt-3 mb-3 btn-success"> View Bill </a>
              @endif

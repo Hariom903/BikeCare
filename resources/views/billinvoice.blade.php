@@ -57,7 +57,7 @@
         <tr>
             <td><b>Invoice No:</b> {{ $booking->id }}</td>
             <td style="text-align:center;"><b>Service Labour Invoice</b></td>
-            <td style="text-align:right;"><b>Invoice Date:</b> {{ now() }}</td>
+            <td style="text-align:right;"><b>Invoice Date:</b> {{$booking->bills->created_at  }}</td>
         </tr>
     </table>
 
@@ -155,12 +155,11 @@
             </tr>
 
             <tr>
-                <td colspan="10" class="text-end">
-                    <strong>Amount in Words:</strong>
-                    {{ ucwords((new \NumberFormatter('en_IN', \NumberFormatter::SPELLOUT))->format($booking->bills->total_amount)) }}
-                    Rupees Only
+                    <td colspan="10" class="text-end">
+    <strong>Amount in Words:</strong>
+    {{ amount_in_words($booking->bills->total_amount) }}
+</td>
 
-                </td>
             </tr>
         </tbody>
     </table>
@@ -179,7 +178,10 @@
         </tr>
     </table>
 
-
+ <form action="{{ route('billinvoice.download',$booking->id) }}" class="text-end" method="post">
+    @csrf
+        <button class="btn btn-primary p-2 m-1 " > Download Now </button>
+ </form>
 
 
 </body>
